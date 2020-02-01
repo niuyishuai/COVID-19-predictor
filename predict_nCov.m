@@ -33,10 +33,10 @@ heal_data=D_lst(:,4)';
 % 画图
 figure
 hold on;
-plot(x_data,D_lst(:,1),'r-o');
-plot(x_data,D_lst(:,2),'b-o');
-plot(x_data,D_lst(:,3),'k-o');
-plot(x_data,D_lst(:,4),'g-o');
+plot(x_data,D_lst(:,1),'r-o','LineWidth',1.5);
+plot(x_data,D_lst(:,2),'b-o','LineWidth',1.5);
+plot(x_data,D_lst(:,3),'k-o','LineWidth',1.5);
+plot(x_data,D_lst(:,4),'g-o','LineWidth',1.5);
 set(gca,'XTick',1:1:n_days);
 set(gcf,'position',[200 200 1000 600]);
 xlim([1 n_days]);
@@ -50,26 +50,26 @@ hold off;
 % 高斯拟合预测
 fprintf('--------------------------------\n');
 fprintf('高斯拟合预测结果：\n');
-[confirm_predictor,~]=createFit(date_lst,confirm_data,'gauss','确诊人数预测');
-fprintf('预测明日确诊人数:%d\n',round(confirm_predictor(n_days+1)));
+[gauss_confirm_predictor,~]=createFit(date_lst,confirm_data,'gauss','确诊人数预测');
+fprintf('预测明日确诊人数:%d\n',round(gauss_confirm_predictor(n_days+1)));
 
-[suspect_predictor,~]=createFit(date_lst,suspect_data,'gauss','疑似人数预测');
-fprintf('预测明日疑似人数:%d\n',round(suspect_predictor(n_days+1)));
+[gauss_suspect_predictor,~]=createFit(date_lst,suspect_data,'gauss','疑似人数预测');
+fprintf('预测明日疑似人数:%d\n',round(gauss_suspect_predictor(n_days+1)));
 
-[dead_predictor,~]=createFit(date_lst,dead_data,'gauss','死亡人数预测');
-fprintf('预测明日死亡人数:%d\n',round(dead_predictor(n_days+1)));
+[gauss_dead_predictor,~]=createFit(date_lst,dead_data,'gauss','死亡人数预测');
+fprintf('预测明日死亡人数:%d\n',round(gauss_dead_predictor(n_days+1)));
 
 % 指数拟合预测
 fprintf('--------------------------------\n');
 fprintf('指数拟合预测结果：\n');
-[confirm_predictor,~]=createFit(date_lst,confirm_data,'exp','确诊人数预测');
-fprintf('预测明日确诊人数:%d\n',round(confirm_predictor(n_days+1)));
+[exp_confirm_predictor,~]=createFit(date_lst,confirm_data,'exp','确诊人数预测');
+fprintf('预测明日确诊人数:%d\n',round(exp_confirm_predictor(n_days+1)));
 
-[suspect_predictor,~]=createFit(date_lst,suspect_data,'exp','疑似人数预测');
-fprintf('预测明日疑似人数:%d\n',round(suspect_predictor(n_days+1)));
+[exp_suspect_predictor,~]=createFit(date_lst,suspect_data,'exp','疑似人数预测');
+fprintf('预测明日疑似人数:%d\n',round(exp_suspect_predictor(n_days+1)));
 
-[dead_predictor,~]=createFit(date_lst,dead_data,'exp','死亡人数预测');
-fprintf('预测明日死亡人数:%d\n',round(dead_predictor(n_days+1)));
+[exp_dead_predictor,~]=createFit(date_lst,dead_data,'exp','死亡人数预测');
+fprintf('预测明日死亡人数:%d\n',round(exp_dead_predictor(n_days+1)));
 
 % 神经网络预测
 fprintf('--------------------------------\n');
@@ -82,3 +82,11 @@ fprintf('预测明日疑似人数:%d\n',round(NN_suspect_predictor(n_days+1)));
 
 [NN_dead_predictor,~]=createNNFit(x_data,dead_data,5,5);
 fprintf('预测明日死亡人数:%d\n',round(NN_dead_predictor(n_days+1)));
+
+%% 长期预测(一周)
+nterms=n_days+7; % 总期数
+curterm=n_days; %当前期
+predictors={gauss_confirm_predictor,exp_confirm_predictor,NN_confirm_predictor}; % 预测器
+predictornames = {'高斯拟合','指数拟合','神经网络'}; %预测器名称
+label='确诊感染一周预测走势'; % 标签
+longtermpredictions(nterms,curterm,predictors,predictornames,label);
