@@ -1,5 +1,5 @@
 function longtermpredictions(nterms,curterm,predictors,predictornames,label)
-    figure;
+    figure('Name',label);
     terms=1:nterms;
     
     hold all;
