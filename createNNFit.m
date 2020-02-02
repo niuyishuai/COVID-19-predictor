@@ -26,7 +26,7 @@ function [bestnet,bestperform] = createNNFit(x_data,target_data,nbneurons,nbtrai
     for i=1:nbtrains
         waitbar(i/nbtrains,h,['ÑµÁ·½ø¶È...',num2str(i/nbtrains*100),'%']);
         % Create a Fitting Network
-        hiddenLayerSize = nbneurals;
+        hiddenLayerSize = nbneurons;
         net = fitnet(hiddenLayerSize,trainFcn);
         
         % Setup Division of Data for Training, Validation, Testing
