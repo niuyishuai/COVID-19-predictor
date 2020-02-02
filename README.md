@@ -1,5 +1,5 @@
 # wuhan-nCov predictor
- Matlab code for predicting the progess of Wuhan 2019-nCov using neural network and curve fittings.
+ Matlab code for predicting the progress of Wuhan 2019-nCov using neural network and curve fittings.
 
 ## Installation
  Download the package to a local folder by running:
