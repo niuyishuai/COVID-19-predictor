@@ -10,7 +10,7 @@ git clone https://github.com/niuyishuai/wuhan-nCov-predictor.git
 ## Examples
  Run Matlab script `predict_nCov.m`
 
-## 数据接口
+## JSON API
 
 [省市每日历史数据](http://ncov.nosensor.com:8080/api/)
 
@@ -24,7 +24,7 @@ git clone https://github.com/niuyishuai/wuhan-nCov-predictor.git
 
 [坐标拾取](http://api.map.baidu.com/lbsapi/getpoint/index.html)
 
-## 疫情动态
+## NEWS
 
 [百度迁徙](https://qianxi.baidu.com/?from=shoubai#city=420100)
 
