@@ -1,4 +1,4 @@
-function [bestnet,bestperform] = createNNFit(x_data,target_data,nbneurals,nbtrains)
+function [bestnet,bestperform] = createNNFit(x_data,target_data,nbneurons,nbtrains)
     % Solve an Input-Output Fitting problem with a Neural Network
     % Created 29-Jan-2020 19:59:36
     %
@@ -6,6 +6,8 @@ function [bestnet,bestperform] = createNNFit(x_data,target_data,nbneurals,nbtrai
     %
     %   x_data - input data.
     %   target_data - target data.
+    %   nbneurons - number of hiden neurons
+    %   nbtrains - number of retrains (we can retrain many times to get a best one)
     % 
     %  Copyright 2020, Yi-Shuai NIU. All Rights Reserved.
     

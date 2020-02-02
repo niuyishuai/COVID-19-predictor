@@ -1,18 +1,19 @@
 function [fitresult, gof] = createFit(date_lst, data, type, label)
-    %CREATEFIT(X_DATA,SIWANG_DATA)
     %  Create a fit.
     %
     %  Data for 'nCov' fit:
     %      X Input : data_lst
     %      Y Output: data
+    %      Fit type: type
+    %      Title   : label
     %  Output:
     %      fitresult : a fit object representing the fit.
     %      gof : structure with goodness-of fit info.
     %
     %  ¡Ì«Î≤Œ‘ƒ FIT, CFIT, SFIT.
+    %
     %  Copyright 2020, Yi-Shuai NIU. All Rights Reserved.    
     
-    %% Fit: 'nCov'.
     n_days = length(date_lst);
     x_data = 1:n_days;
     [xData, yData] = prepareCurveData( x_data(:), data(:) );
@@ -53,5 +54,3 @@ function [fitresult, gof] = createFit(date_lst, data, type, label)
     set(gcf,'position',[500 500 1000 500]);
     grid on
 end
-    
-    
