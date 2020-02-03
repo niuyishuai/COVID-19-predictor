@@ -5,13 +5,12 @@ close all;
 % 读取json文件
 %data=importjsonFile('data/qq历史-0129.json');
 % 或直接对接jsonAPI读取数据
-data=importjsonAPI('https://service-n9zsbooc-1252957949.gz.apigw.tencentcs.com/release/qq'); % QQ数据
+%data=importjsonAPI('https://service-n9zsbooc-1252957949.gz.apigw.tencentcs.com/release/qq'); % QQ数据
+%daycounts = data.data.wuwei_ww_cn_day_counts;
+daycounts=decodejsonAPI(1); % QQ API数据
 
-% 升序排列数据
-[~,index] = sortrows({data.data.wuwei_ww_cn_day_counts.date}.'); data.data.wuwei_ww_cn_day_counts = data.data.wuwei_ww_cn_day_counts(index); clear index
 
 %% 解析数据
-daycounts = data.data.wuwei_ww_cn_day_counts;
 n_days=size(daycounts,1);
 date_lst=cell(n_days,1);
 D_lst=zeros(n_days,4);
