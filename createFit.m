@@ -35,6 +35,9 @@ function [fitresult, gof] = createFit(date_lst, data, type, label)
             opts.Display = 'Off';
             opts.StartPoint = [max(data),n_days,std(1:n_days)];
             opts.Lower = [0,1,0];
+        case 'poly'
+            ft = fittype( 'poly5' );
+            opts = fitoptions();
     end
     % Fit model to data.
     [fitresult, gof] = fit( xData, yData, ft, opts );
