@@ -2,8 +2,10 @@ clc;
 clear;
 close all;
 %% 数据
-daycounts=decodejsonAPI(1); % QQ API数据
-
+% 对接jsonAPI读取数据
+data = importjsonAPI('https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5');
+data=jsondecode(data.data);
+daycounts=data.chinaDayAddList;
 
 %% 解析数据
 n_days=size(daycounts,1);
@@ -25,7 +27,7 @@ dead_data=D_lst(:,3)';
 heal_data=D_lst(:,4)';
 
 % 画图
-figure('Name','武汉新型冠状病毒增长趋势');
+figure('Name','武汉新型冠状病毒新增变化趋势');
 set(gcf,'position',[200 200 1000 600]);
 subplot(2,1,1);
 hold on;
@@ -58,25 +60,25 @@ hold off;
 %% 高斯拟合预测
 fprintf('--------------------------------\n');
 fprintf('高斯拟合预测结果：\n');
-[gauss_confirm_predictor,~]=createFit(date_lst,confirm_data,'gauss','确诊人数预测 (高斯拟合)');
+[gauss_confirm_predictor,~]=createFit(date_lst,confirm_data,'gauss','新增确诊人数预测 (高斯拟合)');
 fprintf('预测明日确诊人数:%d\n',round(gauss_confirm_predictor(n_days+1)));
 
-[gauss_suspect_predictor,~]=createFit(date_lst,suspect_data,'gauss','疑似人数预测 (高斯拟合)');
+[gauss_suspect_predictor,~]=createFit(date_lst,suspect_data,'gauss','新增疑似人数预测 (高斯拟合)');
 fprintf('预测明日疑似人数:%d\n',round(gauss_suspect_predictor(n_days+1)));
 
-[gauss_dead_predictor,~]=createFit(date_lst,dead_data,'gauss','死亡人数预测 (高斯拟合)');
+[gauss_dead_predictor,~]=createFit(date_lst,dead_data,'gauss','新增死亡人数预测 (高斯拟合)');
 fprintf('预测明日死亡人数:%d\n',round(gauss_dead_predictor(n_days+1)));
 
 %% 指数拟合预测
 fprintf('--------------------------------\n');
 fprintf('指数拟合预测结果：\n');
-[exp_confirm_predictor,~]=createFit(date_lst,confirm_data,'exp','确诊人数预测 (指数拟合)');
+[exp_confirm_predictor,~]=createFit(date_lst,confirm_data,'exp','新增确诊人数预测 (指数拟合)');
 fprintf('预测明日确诊人数:%d\n',round(exp_confirm_predictor(n_days+1)));
 
-[exp_suspect_predictor,~]=createFit(date_lst,suspect_data,'exp','疑似人数预测 (指数拟合)');
+[exp_suspect_predictor,~]=createFit(date_lst,suspect_data,'exp','新增疑似人数预测 (指数拟合)');
 fprintf('预测明日疑似人数:%d\n',round(exp_suspect_predictor(n_days+1)));
 
-[exp_dead_predictor,~]=createFit(date_lst,dead_data,'exp','死亡人数预测 (指数拟合)');
+[exp_dead_predictor,~]=createFit(date_lst,dead_data,'exp','新增死亡人数预测 (指数拟合)');
 fprintf('预测明日死亡人数:%d\n',round(exp_dead_predictor(n_days+1)));
 
 %% 多项式拟合预测
@@ -94,13 +96,13 @@ fprintf('预测明日死亡人数:%d\n',round(poly_dead_predictor(n_days+1)));
 %% Smooth Splitting拟合预测
 fprintf('--------------------------------\n');
 fprintf('Smooth Splitting拟合预测结果：\n');
-[smoothsplit_confirm_predictor,~]=createFit(date_lst,confirm_data,'smoothsplit','确诊人数预测 (smoothsplit)');
+[smoothsplit_confirm_predictor,~]=createFit(date_lst,confirm_data,'smoothsplit','新增确诊人数预测 (smoothsplit)');
 fprintf('预测明日确诊人数:%d\n',round(smoothsplit_confirm_predictor(n_days+1)));
 
-[smoothsplit_suspect_predictor,~]=createFit(date_lst,suspect_data,'smoothsplit','疑似人数预测 (smoothsplit)');
+[smoothsplit_suspect_predictor,~]=createFit(date_lst,suspect_data,'smoothsplit','新增疑似人数预测 (smoothsplit)');
 fprintf('预测明日疑似人数:%d\n',round(smoothsplit_suspect_predictor(n_days+1)));
 
-[smoothsplit_dead_predictor,~]=createFit(date_lst,dead_data,'smoothsplit','死亡人数预测 (smoothsplit)');
+[smoothsplit_dead_predictor,~]=createFit(date_lst,dead_data,'smoothsplit','新增死亡人数预测 (smoothsplit)');
 fprintf('预测明日死亡人数:%d\n',round(smoothsplit_dead_predictor(n_days+1)));
 
 %% 神经网络预测
@@ -132,15 +134,15 @@ fprintf('预测明日死亡人数:%d\n',meanprediction(lst_dead_predictors,n_days+1));
 nterms=n_days+7; % 总期数
 curterm=n_days; %当前期
 predictornames = {'高斯拟合','多项式拟合','神经网络','SmoothSplitting'}; %预测器名称
-label='确诊感染一周趋势预测'; % 标签
+label='新增确诊感染一周趋势预测'; % 标签
 longtermpredictions(nterms,curterm,lst_confirm_predictors,predictornames,label);
 
 % 疑似
 predictornames = {'高斯拟合','多项式拟合','神经网络','SmoothSplitting'}; %预测器名称
-label='疑似感染一周趋势预测'; % 标签
+label='新增疑似感染一周趋势预测'; % 标签
 longtermpredictions(nterms,curterm,lst_suspect_predictors,predictornames,label);
 
 % 死亡
 predictornames = {'高斯拟合','多项式拟合','神经网络','SmoothSplitting'}; %预测器名称
-label='死亡一周趋势预测'; % 标签
+label='新增死亡一周趋势预测'; % 标签
 longtermpredictions(nterms,curterm,lst_dead_predictors,predictornames,label);

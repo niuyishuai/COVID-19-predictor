@@ -38,6 +38,11 @@ function [fitresult, gof] = createFit(date_lst, data, type, label)
         case 'poly'
             ft = fittype( 'poly5' );
             opts = fitoptions();
+        case 'smoothsplit'
+            ft = fittype( 'smoothingspline' );
+            opts = fitoptions( 'Method', 'SmoothingSpline' );
+            opts.Normalize = 'on';
+            opts.SmoothingParam = 0.999999583268374;
     end
     % Fit model to data.
     [fitresult, gof] = fit( xData, yData, ft, opts );
