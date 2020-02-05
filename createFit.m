@@ -49,7 +49,8 @@ function [fitresult, gof] = createFit(date_lst, data, type, label)
     
     % Plot fit with data.
     figure( 'Name', [label,': R-Square (', num2str(gof.rsquare),')']);
-    h = plot( fitresult, xData, yData);
+    h = plot( fitresult, xData, yData, 'o');
+    h(1).LineWidth = 1.5;
     h(2).LineWidth = 1.5;
     legend( h, '真实数据', '预测结果', 'Location', 'NorthEast', 'Interpreter', 'none' );
     set(gca,'XTick',1:1:n_days);
