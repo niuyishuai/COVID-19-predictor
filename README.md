@@ -8,7 +8,7 @@ git clone https://github.com/niuyishuai/wuhan-nCov-predictor.git
 ```
 
 ## Examples
- Run Matlab script `predict_nCov.m`
+ Run Matlab script `predict_nCov.m` for cumulative trend Forecasting and `predict_Add_nCov` for added trend forcasting
 
 ## JSON API
 
