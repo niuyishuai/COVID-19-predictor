@@ -1,17 +1,19 @@
-function [bestnet,bestperform] = createNNFit(x_data,target_data,nbneurons,nbtrains)
-    % Solve an Input-Output Fitting problem with a Neural Network
-    % Created 29-Jan-2020 19:59:36
+function [bestnet,bestperform] = create_NNFit(date_lst,target_data,nbneurons,nbtrains)
+    %  create_NNFit
+    %   solve an Input-Output Fitting problem with a Neural Network
     %
-    % This script assumes these variables are defined:
+    %  INPUT:
+    %      date_lst: date list by days (X Input)
+    %      target_data: Y Output
+    %      nbneurons: number of hiden neurons
+    %      nbtrains: number of retrains (we can retrain many times to get a best one)
+    %  Output:
+    %      bestnet: best trained net
+    %      bestperform: the performance of bestnet
     %
-    %   x_data - input data.
-    %   target_data - target data.
-    %   nbneurons - number of hiden neurons
-    %   nbtrains - number of retrains (we can retrain many times to get a best one)
-    % 
-    %  Copyright 2020, Yi-Shuai NIU. All Rights Reserved.
+    %  Copyright 2020, Yi-Shuai NIU. All Rights Reserved.   
     
-    x = x_data;
+    x = 1:length(date_lst);
     t = target_data;
     
     % Choose a Training Function
