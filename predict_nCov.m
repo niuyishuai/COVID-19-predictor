@@ -2,11 +2,11 @@ clc;
 clear;
 close all;
 %% 数据
-daycounts=decode_JsonAPI(2); % QQ API数据
+daycounts=decode_JsonAPI(1); % QQ API数据
 
 
 %% 解析数据
-[n_days, date_lst, confirm_data, suspect_data, dead_data, heal_data] = decode_DayCounts(daycounts);
+[n_days, date_lst, confirm_data, suspect_data, dead_data, heal_data] = decode_DayCounts(daycounts,1,size(daycounts,1)-1);
 draw_GeneralInfo(date_lst, confirm_data, suspect_data, dead_data, heal_data);
 
 %% 预测

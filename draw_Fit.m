@@ -4,7 +4,7 @@ function draw_Fit(n_days, date_lst, label,rsquare, fitresult, xData, yData)
     h = plot( fitresult, xData, yData, 'o');
     h(1).LineWidth = 1.5;
     h(2).LineWidth = 1.5;
-    legend( h, '真实数据', '预测结果', 'Location', 'NorthEast', 'Interpreter', 'none' );
+    legend( h, '真实数据', '预测结果','Location','northwest', 'Interpreter', 'none' );
     set(gca,'XTick',1:1:n_days);
     xlim([1 n_days]);
     xticklabels(date_lst);

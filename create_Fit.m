@@ -34,8 +34,12 @@ function [fitresult, gof] = create_Fit(date_lst, data, type, label)
             ft = fittype( 'gauss1' );
             opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
             opts.Display = 'Off';
-            opts.StartPoint = [max(data),n_days,std(1:n_days)];
-            opts.Lower = [0,1,0];
+            % estimate initial point
+            [a,b]=max(data);
+            c=(x_data-b).^2./(log(abs(a))-log(abs(data)));
+            c=sqrt(mean(c(~isnan(c))));
+            opts.StartPoint = [a,b,c];
+            opts.Lower = [-inf,-inf,0];
         case 'poly'
             ft = fittype( 'poly5' );
             opts = fitoptions();
