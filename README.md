@@ -1,14 +1,16 @@
 # wuhan-nCov predictor
  Matlab code for predicting the progress of Wuhan 2019-nCov using neural network and curve fittings.
+ 
+ This project is partially supported by Shanghai Jiao Tong University (Grant 2020RK10), National Natural Science Foundation of China (Grant 11601327) and Key Construction National "985" Program of China (Grant WF220426001).
 
 ## Installation
  Download the package to a local folder by running:
 ```console
-git clone https://github.com/niuyishuai/wuhan-nCov-predictor.git
+git clone https://github.com/niuyishuai/COVID-19-predictor.git
 ```
 
 ## Examples
- Run Matlab script `predict_nCov.m` for cumulative trend Forecasting and `predict_Add_nCov` for added trend forcasting
+ Run Matlab script `predict_period_covid19.mlx` for trend Forecasting.
 
 ## JSON API
 
