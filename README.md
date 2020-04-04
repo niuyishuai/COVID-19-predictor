@@ -1,5 +1,5 @@
-# wuhan-nCov predictor
- Matlab code for predicting the progress of Wuhan 2019-nCov using neural network and curve fittings.
+# COVID-19-predictor
+ Matlab code for predicting the progress of COVID-19 using curve fittings and BP neural network.
  
  This project is partially supported by Shanghai Jiao Tong University (Grant 2020RK10), National Natural Science Foundation of China (Grant 11601327) and Key Construction National "985" Program of China (Grant WF220426001).
 
